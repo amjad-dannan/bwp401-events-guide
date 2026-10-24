@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>تفاصيل الفعالية | دليل فعاليات الجامعة الافتراضية</title>
+    <!-- Bootstrap 5 (RTL build) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Site stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <!-- Header: logo and navigation bar -->
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            <span class="footer-brand-icon">
+              <i class="bi bi-mortarboard-fill"></i>
+            </span>
+            دليل فعاليات الجامعة الافتراضية
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+            title="فتح القائمة"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">الرئيسية</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="events.html">الفعاليات</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="event.html">تفاصيل الفعالية</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">عن الدليل</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">اتصل بنا</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      <div class="page-intro">
+        <div class="container">
+          <h1>تفاصيل الفعالية</h1>
+          <p>كل ما تحتاج معرفته عن الفعالية من موعد ومكان وتفاصيل المشاركة.</p>
+        </div>
+      </div>
+
+      <!-- <section class="band band-light event-page">
+        <div class="container">
+          <article class="event-detail event-detail-single" id="event-1">
+            <div class="event-heading">
+              <span class="badge cat-culture">ثقافة</span>
+              <h2>أمسية شعرية: أصوات شابة</h2>
+              <p>
+                مساحة يلتقي فيها الشعراء الشباب لمشاركة نصوصهم وتجاربهم الأدبية.
+              </p>
+            </div>
+
+            <div class="row g-4 align-items-stretch event-main-row">
+              <div class="col-lg-7">
+                <div class="event-cover">
+                  <img
+                    src="assets/img/ev1.jpg"
+                    class="img-fluid"
+                    alt="شاب يقرأ نصاً أمام الميكروفون في أمسية أدبية"
+                    width="1920"
+                    height="1152"
+                  />
+                  <span class="event-cover-label">
+                    <i class="bi bi-book-half"></i>
+                    فعالية ثقافية
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-lg-5">
+                <div class="info-box event-info-box">
+                  <h3>
+                    <i class="bi bi-calendar2-event"></i>
+                    معلومات الفعالية
+                  </h3>
+
+                  <div class="event-info-item">
+                    <span class="event-info-icon">
+                      <i class="bi bi-calendar3"></i>
+                    </span>
+                    <div>
+                      <small>التاريخ</small>
+                      <p>الأربعاء 14 تشرين الأول 2026</p>
+                    </div>
+                  </div>
+
+                  <div class="event-info-item">
+                    <span class="event-info-icon">
+                      <i class="bi bi-clock"></i>
+                    </span>
+                    <div>
+                      <small>الوقت</small>
+                      <p>من 18:00 حتى 20:00</p>
+                    </div>
+                  </div>
+
+                  <div class="event-info-item">
+                    <span class="event-info-icon">
+                      <i class="bi bi-geo-alt"></i>
+                    </span>
+                    <div>
+                      <small>المكان</small>
+                      <p>القاعة الرئيسية مع بث مباشر عبر الإنترنت</p>
+                    </div>
+                  </div>
+
+                  <div class="event-info-item">
+                    <span class="event-info-icon">
+                      <i class="bi bi-ticket-perforated"></i>
+                    </span>
+                    <div>
+                      <small>رسوم الدخول</small>
+                      <p>مجاني لطلاب الجامعة وأسرهم</p>
+                    </div>
+                  </div>
+
+                  <div class="event-actions">
+                    <a
+                      id="calBtn1"
+                      href="assets/calendar/event-1.ics"
+                      download="event-1.ics"
+                      class="btn btn-accent"
+                    >
+                      <i class="bi bi-calendar-plus"></i>
+                      أضف للتقويم
+                    </a>
+
+                    <button
+                      type="button"
+                      id="shareBtn1"
+                      class="btn btn-main"
+                      onclick="shareEvent(1)"
+                    >
+                      <i class="bi bi-share"></i>
+                      مشاركة الفعالية
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-4 event-extra-content">
+              <div class="col-lg-8">
+                <section class="event-content-card">
+                  <h3>
+                    <i class="bi bi-info-circle"></i>
+                    عن الفعالية
+                  </h3>
+                  <p>
+                    أمسية يقرأ فيها طلاب من مختلف الكليات قصائدهم الخاصة باللغة
+                    العربية، ويتخللها تعليق قصير من أحد أعضاء الهيئة التدريسية
+                    على كل نص، وتُختتم بفقرة حوار مفتوح بين الشعراء والحضور.
+                    الدخول مجاني لطلاب الجامعة وأسرهم، ويمكن للطلاب خارج المدينة
+                    متابعة الأمسية عبر البث المباشر.
+                  </p>
+
+                  <h3 class="mt-4">
+                    <i class="bi bi-images"></i>
+                    صور من الفعالية
+                  </h3>
+
+                  <div class="row g-3 gallery event-gallery">
+                    <div class="col-4">
+                      <img
+                        class="img-fluid"
+                        src="assets/img/ev1.jpg"
+                        alt="قراءة شعرية أمام الجمهور"
+                        width="1920"
+                        height="1152"
+                      />
+                    </div>
+                    <div class="col-4">
+                      <img
+                        class="img-fluid"
+                        src="assets/img/hall.jpg"
+                        alt="القاعة الرئيسية"
+                        width="1920"
+                        height="1152"
+                      />
+                    </div>
+                    <div class="col-4">
+                      <img
+                        class="img-fluid"
+                        src="assets/img/online.jpg"
+                        alt="متابعة الفعالية عبر الإنترنت"
+                        width="1920"
+                        height="1152"
+                      />
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <div class="col-lg-4">
+                <aside class="event-location-card">
+                  <h3>
+                    <i class="bi bi-geo"></i>
+                    موقع الفعالية
+                  </h3>
+
+                  <img
+                    src="assets/img/map-hall.svg"
+                    class="img-fluid map-img"
+                    alt="خريطة توضيحية لموقع القاعة الرئيسية"
+                    width="1200"
+                    height="600"
+                  />
+
+                  <p>
+                    تُقام الأمسية في القاعة الرئيسية، مع إمكانية المتابعة عبر
+                    البث المباشر للطلاب الموجودين خارج المدينة.
+                  </p>
+                </aside>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section> -->
+
+      <section class="band band-light event-page">
+        <div class="container">
+          <div id="eventDetails">
+            <!-- Event details will be rendered dynamically -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <div class="footer-about">
+            <a href="index.html" class="footer-brand">
+              <span class="footer-brand-icon">
+                <i class="bi bi-mortarboard-fill"></i>
+              </span>
+              <span>دليل فعاليات الجامعة الافتراضية</span>
+            </a>
+
+            <p>
+              دليل طلابي يجمع الفعاليات الثقافية والرياضية والموسيقية والعائلية
+              في مكان واحد.
+            </p>
+
+            <span class="footer-note">
+              <i class="bi bi-info-circle"></i>
+              الفعاليات المعروضة نماذج توضيحية للمشروع الدراسي.
+            </span>
+          </div>
+
+          <div class="footer-links">
+            <h2 class="footer-title">روابط سريعة</h2>
+
+            <ul>
+              <li>
+                <a href="index.html"
+                  ><i class="bi bi-chevron-left"></i> الرئيسية</a
+                >
+              </li>
+              <li>
+                <a href="events.html"
+                  ><i class="bi bi-chevron-left"></i> كل الفعاليات</a
+                >
+              </li>
+              <li>
+                <a href="event.html"
+                  ><i class="bi bi-chevron-left"></i> تفاصيل الفعالية</a
+                >
+              </li>
+              <li>
+                <a href="about.html"
+                  ><i class="bi bi-chevron-left"></i> عن الدليل</a
+                >
+              </li>
+              <li>
+                <a href="contact.html"
+                  ><i class="bi bi-chevron-left"></i> اتصل بنا</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-contact">
+            <h2 class="footer-title">تواصل معنا</h2>
+
+            <div class="footer-socials" aria-label="أيقونات التواصل الاجتماعي">
+              <span class="social-link" title="إنستغرام">
+                <i class="bi bi-instagram"></i>
+              </span>
+              <span class="social-link" title="فيسبوك">
+                <i class="bi bi-facebook"></i>
+              </span>
+              <span class="social-link" title="لينكدإن">
+                <i class="bi bi-linkedin"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 دليل فعاليات الجامعة الافتراضية. جميع الحقوق محفوظة.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS (needed for the collapsible menu on small screens) -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
+    <!-- Site JavaScript -->
+    <script type="text/javascript" src="assets/js/main.js"></script>
+  </body>
+</html>

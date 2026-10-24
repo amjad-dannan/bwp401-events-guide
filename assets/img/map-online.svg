@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300">
+  <!-- Static illustration for an online event: a faded map in the background and a navy screen showing a small map with the location pin -->
+  <rect x="0" y="0" width="600" height="300" fill="#eef2f6" />
+
+  <!-- Faded map in the background -->
+  <rect x="30" y="30" width="50" height="140" fill="#e3e9ef" />
+  <rect x="150" y="30" width="330" height="140" fill="#e3e9ef" />
+  <rect x="530" y="30" width="40" height="140" fill="#e3e9ef" />
+  <rect x="30" y="240" width="50" height="40" fill="#e3e9ef" />
+  <rect x="150" y="240" width="330" height="40" fill="#e3e9ef" />
+  <rect x="530" y="240" width="40" height="40" fill="#e3e9ef" />
+  <rect x="0" y="200" width="600" height="24" fill="#ffffff" />
+  <rect x="110" y="0" width="24" height="300" fill="#ffffff" />
+  <rect x="500" y="0" width="14" height="300" fill="#ffffff" />
+
+  <!-- Screen: navy frame, turquoise title bar and a stand -->
+  <rect x="280" y="220" width="40" height="14" fill="#0b2545" />
+  <rect x="240" y="234" width="120" height="8" fill="#0b2545" />
+  <rect x="150" y="40" width="300" height="180" fill="#0b2545" />
+  <rect x="150" y="40" width="300" height="24" fill="#1aa6a0" />
+  <rect x="214" y="46" width="220" height="12" fill="#ffffff" />
+  <circle cx="166" cy="52" r="5" fill="#ffffff" />
+  <circle cx="182" cy="52" r="5" fill="#ffffff" />
+  <circle cx="198" cy="52" r="5" fill="#ffffff" />
+
+  <!-- Small map inside the screen -->
+  <rect x="156" y="70" width="288" height="144" fill="#f4f7fa" />
+  <rect x="176" y="86" width="84" height="34" fill="#d9e1ea" />
+  <rect x="316" y="86" width="100" height="34" fill="#d9e1ea" />
+  <rect x="176" y="162" width="84" height="34" fill="#d9e1ea" />
+  <rect x="316" y="162" width="100" height="34" fill="#d9e1ea" />
+  <rect x="156" y="130" width="288" height="16" fill="#ffffff" />
+  <rect x="280" y="70" width="16" height="144" fill="#ffffff" />
+
+  <!-- Location pin -->
+  <rect x="284" y="146" width="8" height="28" fill="#d93025" />
+  <circle cx="288" cy="138" r="18" fill="#d93025" />
+  <circle cx="288" cy="138" r="7" fill="#ffffff" />
+</svg>

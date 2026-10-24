@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>اتصل بنا | دليل فعاليات الجامعة الافتراضية</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- File Css -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+
+  <body onload="initContact()">
+    <!-- Header -->
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.html">
+              <span class="footer-brand-icon">
+                <i class="bi bi-mortarboard-fill"></i>
+              </span>
+              دليل فعاليات الجامعة الافتراضية
+            </a>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+            title="فتح القائمة"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">الرئيسية</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="events.html">الفعاليات</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="event.html">تفاصيل الفعالية</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">عن الدليل</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="contact.html">اتصل بنا</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      <!-- Page intro -->
+      <section class="page-intro">
+        <div class="container">
+          <div class="contact-intro-content">
+            <span class="contact-eyebrow">
+              <i class="bi bi-chat-dots"></i>
+              نحن هنا للمساعدة
+            </span>
+
+            <h1>اتصل بنا</h1>
+
+            <p>
+              لديك استفسار أو اقتراح؟ يسعدنا أن تشاركنا رأيك. يمكنك استخدام
+              النموذج أدناه أو مراسلتنا عبر البريد الإلكتروني.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact section -->
+      <section class="band band-light contact-page-section">
+        <div class="container">
+          <div class="row g-4 align-items-start">
+            <!-- Contact form -->
+            <div class="col-lg-7" id="contactSection">
+              <div class="panel contact-form-panel">
+                <div class="contact-section-heading">
+                  <span class="contact-heading-icon">
+                    <i class="bi bi-envelope-paper"></i>
+                  </span>
+
+                  <div>
+                    <h2 class="section-title">أرسل لنا رسالة</h2>
+                    <p>يرجى تعبئة الحقول التالية.</p>
+                  </div>
+                </div>
+
+                <form id="contactForm" action="">
+                  <div class="mb-3">
+                    <label for="name" class="form-label"> الاسم الكامل </label>
+
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      class="form-control"
+                      placeholder="اكتب اسمك الكامل"
+                      autocomplete="name"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="email" class="form-label">
+                      البريد الإلكتروني
+                    </label>
+
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      class="form-control"
+                      placeholder="example@domain.com"
+                      autocomplete="email"
+                      dir="ltr"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="typeSelect" class="form-label fw-semibold">
+                      الفئة
+                    </label>
+                    <select
+                      id="typeSelect"
+                      name="categorySelect"
+                      class="form-select"
+                    >
+                      <option value="استفسارات">استفسارات</option>
+                      <option value="دعم">دعم</option>
+                      <option value="شراكة">شراكة</option>
+                      <option value="ملاحظات">ملاحظات</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="message" class="form-label"> الرسالة </label>
+
+                    <textarea
+                      id="message"
+                      name="message"
+                      class="form-control"
+                      rows="5"
+                      placeholder="اكتب استفسارك أو اقتراحك هنا..."
+                    ></textarea>
+                  </div>
+
+                  <div class="d-flex flex-wrap gap-2">
+                    <button type="submit" id="sendBtn" class="btn btn-main">
+                      <i class="bi bi-send ms-1"></i>
+                      إرسال الرسالة
+                    </button>
+
+                    <button
+                      type="reset"
+                      id="clearBtn"
+                      class="btn btn-outline-secondary"
+                    >
+                      <i class="bi bi-arrow-counterclockwise ms-1"></i>
+                      مسح الحقول
+                    </button>
+                  </div>
+                </form>
+
+                <!-- Validation messages -->
+                <div
+                  id="successAlert"
+                  class="alert alert-success mt-4"
+                  style="display: none"
+                  role="status"
+                >
+                  تم التحقق من الحقول بنجاح. الموقع تجريبي ولا تُرسل الرسالة
+                  فعليًا.
+                </div>
+
+                <div
+                  id="errorName"
+                  class="alert alert-danger mt-3"
+                  style="display: none"
+                  role="alert"
+                >
+                  حقل الاسم مطلوب.
+                </div>
+
+                <div
+                  id="errorEmail"
+                  class="alert alert-danger mt-3"
+                  style="display: none"
+                  role="alert"
+                >
+                  يرجى إدخال بريد إلكتروني صحيح.
+                </div>
+
+                <div
+                  id="errorMessage"
+                  class="alert alert-danger mt-3"
+                  style="display: none"
+                  role="alert"
+                >
+                  حقل الرسالة مطلوب.
+                </div>
+              </div>
+            </div>
+
+            <!-- Alternative contact -->
+            <div class="col-lg-5" id="altContact">
+              <div class="contact-side">
+                <h2 class="section-title">معلومات التواصل</h2>
+
+                <p class="contact-side-description">
+                  نرحب باستفساراتكم ومقترحاتكم التي تساعدنا على تطوير دليل
+                  الفعاليات وتحسين تجربة الطلاب.
+                </p>
+
+                <div class="contact-info-item">
+                  <span class="contact-info-icon">
+                    <i class="bi bi-envelope"></i>
+                  </span>
+
+                  <div>
+                    <h3>البريد الإلكتروني</h3>
+                    <a href="mailto:nanohy235@gmail.com" dir="ltr">
+                      svu@university.com
+                    </a>
+                  </div>
+                </div>
+
+                <div class="contact-info-item">
+                  <span class="contact-info-icon">
+                    <i class="bi bi-clock"></i>
+                  </span>
+
+                  <div>
+                    <h3>استقبال الاستفسارات</h3>
+                    <p>يمكنك إرسال استفسارك في أي وقت.</p>
+                  </div>
+                </div>
+
+                <div class="contact-social-area">
+                  <h3>تابعنا عبر منصات التواصل</h3>
+
+                  <div class="contact-social-icons">
+                    <span
+                      class="contact-social-icon"
+                      title="إنستغرام"
+                      aria-label="إنستغرام"
+                    >
+                      <i class="bi bi-instagram"></i>
+                    </span>
+
+                    <span
+                      class="contact-social-icon"
+                      title="فيسبوك"
+                      aria-label="فيسبوك"
+                    >
+                      <i class="bi bi-facebook"></i>
+                    </span>
+
+                    <span
+                      class="contact-social-icon"
+                      title="لينكدإن"
+                      aria-label="لينكدإن"
+                    >
+                      <i class="bi bi-linkedin"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="contact-help-note">
+                  <i class="bi bi-info-circle"></i>
+
+                  <p>
+                    لتقديم فعالية جديدة، يمكنك الاطلاع على المعلومات وشروط
+                    التقديم في
+                    <a href="about.html">صفحة عن الدليل</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <div class="footer-about">
+            <a href="index.html" class="footer-brand">
+              <span class="footer-brand-icon">
+                <i class="bi bi-mortarboard-fill"></i>
+              </span>
+              <span>دليل فعاليات الجامعة الافتراضية</span>
+            </a>
+
+            <p>
+              دليل طلابي يجمع الفعاليات الثقافية والرياضية والموسيقية والعائلية
+              في مكان واحد.
+            </p>
+
+            <span class="footer-note">
+              <i class="bi bi-info-circle"></i>
+              الفعاليات المعروضة نماذج توضيحية للمشروع الدراسي.
+            </span>
+          </div>
+
+          <div class="footer-links">
+            <h2 class="footer-title">روابط سريعة</h2>
+
+            <ul>
+              <li>
+                <a href="index.html"
+                  ><i class="bi bi-chevron-left"></i> الرئيسية</a
+                >
+              </li>
+              <li>
+                <a href="events.html"
+                  ><i class="bi bi-chevron-left"></i> كل الفعاليات</a
+                >
+              </li>
+              <li>
+                <a href="event.html"
+                  ><i class="bi bi-chevron-left"></i> تفاصيل الفعالية</a
+                >
+              </li>
+              <li>
+                <a href="about.html"
+                  ><i class="bi bi-chevron-left"></i> عن الدليل</a
+                >
+              </li>
+              <li>
+                <a href="contact.html"
+                  ><i class="bi bi-chevron-left"></i> اتصل بنا</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-contact">
+            <h2 class="footer-title">تواصل معنا</h2>
+
+            <div class="footer-socials" aria-label="أيقونات التواصل الاجتماعي">
+              <span class="social-link" title="إنستغرام">
+                <i class="bi bi-instagram"></i>
+              </span>
+              <span class="social-link" title="فيسبوك">
+                <i class="bi bi-facebook"></i>
+              </span>
+              <span class="social-link" title="لينكدإن">
+                <i class="bi bi-linkedin"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 دليل فعاليات الجامعة الافتراضية. جميع الحقوق محفوظة.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="assets/js/main.js"></script>
+  </body>
+</html>

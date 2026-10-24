@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+  <!-- Site logo: a calendar page with a turquoise band and two tabs; the event day is marked in navy -->
+  <rect x="3" y="7" width="30" height="26" fill="#ffffff" />
+  <rect x="3" y="7" width="30" height="8" fill="#1aa6a0" />
+  <rect x="10" y="3" width="4" height="7" fill="#ffffff" />
+  <rect x="22" y="3" width="4" height="7" fill="#ffffff" />
+  <rect x="8" y="18" width="5" height="5" fill="#d9e1ea" />
+  <rect x="16" y="18" width="5" height="5" fill="#d9e1ea" />
+  <rect x="24" y="18" width="5" height="5" fill="#d9e1ea" />
+  <rect x="8" y="26" width="5" height="5" fill="#d9e1ea" />
+  <rect x="16" y="26" width="5" height="5" fill="#0b2545" />
+  <rect x="24" y="26" width="5" height="5" fill="#d9e1ea" />
+</svg>

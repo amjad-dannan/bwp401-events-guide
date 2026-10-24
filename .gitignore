@@ -1,0 +1,10 @@
+# Development material, never published
+references/
+
+# Temporary and OS files
+*.tmp
+*.bak
+*.log
+*.zip
+Thumbs.db
+.DS_Store

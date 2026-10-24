@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//BWP401 Events Guide//AR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:event-5-20261102@bwp401-events-guide
+DTSTAMP:20261012T000000Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261105
+SUMMARY:معرض الكتاب الجامعي
+LOCATION:القاعة الرئيسية
+DESCRIPTION:معرض لثلاثة أيام يضم كتباً أكاديمي
+ ة وأدبية بأسعار مخفضة للطلاب. يومياً من 10
+ :00 حتى 17:00.
+END:VEVENT
+END:VCALENDAR

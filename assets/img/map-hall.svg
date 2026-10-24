@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300">
+  <!-- Static schematic map of the main hall: white streets, grey buildings, campus square in light turquoise, the hall in navy with a location pin -->
+  <rect x="0" y="0" width="600" height="300" fill="#eef2f6" />
+
+  <!-- Buildings and the square -->
+  <rect x="30" y="30" width="140" height="90" fill="#8fd8d4" />
+  <rect x="250" y="30" width="190" height="90" fill="#d9e1ea" />
+  <rect x="510" y="30" width="60" height="90" fill="#d9e1ea" />
+  <rect x="30" y="196" width="140" height="80" fill="#d9e1ea" />
+  <rect x="510" y="196" width="60" height="80" fill="#d9e1ea" />
+
+  <!-- Streets -->
+  <rect x="0" y="150" width="600" height="24" fill="#ffffff" />
+  <rect x="200" y="0" width="24" height="300" fill="#ffffff" />
+  <rect x="470" y="0" width="14" height="300" fill="#ffffff" />
+  <rect x="0" y="240" width="200" height="12" fill="#ffffff" />
+
+  <!-- Main hall: navy building with a turquoise entrance and windows -->
+  <rect x="250" y="196" width="190" height="80" fill="#0b2545" />
+  <rect x="250" y="196" width="190" height="8" fill="#1aa6a0" />
+  <rect x="268" y="232" width="16" height="16" fill="#ffffff" />
+  <rect x="296" y="232" width="16" height="16" fill="#ffffff" />
+  <rect x="378" y="232" width="16" height="16" fill="#ffffff" />
+  <rect x="406" y="232" width="16" height="16" fill="#ffffff" />
+
+  <!-- Location pin -->
+  <rect x="341" y="214" width="8" height="30" fill="#d93025" />
+  <circle cx="345" cy="206" r="20" fill="#d93025" />
+  <circle cx="345" cy="206" r="8" fill="#ffffff" />
+</svg>

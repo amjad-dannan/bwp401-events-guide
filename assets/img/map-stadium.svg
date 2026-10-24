@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300">
+  <!-- Static schematic map of the university stadium: white streets, grey buildings, grey stands around a green pitch with a location pin -->
+  <rect x="0" y="0" width="600" height="300" fill="#eef2f6" />
+
+  <!-- Buildings and the green area -->
+  <rect x="30" y="30" width="70" height="50" fill="#d9e1ea" />
+  <rect x="150" y="30" width="210" height="50" fill="#d9e1ea" />
+  <rect x="420" y="30" width="150" height="50" fill="#d9e1ea" />
+  <rect x="30" y="140" width="70" height="130" fill="#d9e1ea" />
+  <rect x="420" y="140" width="150" height="60" fill="#d9e1ea" />
+  <rect x="420" y="220" width="150" height="50" fill="#8fd8d4" />
+
+  <!-- Streets -->
+  <rect x="0" y="96" width="600" height="24" fill="#ffffff" />
+  <rect x="380" y="0" width="24" height="300" fill="#ffffff" />
+  <rect x="120" y="0" width="14" height="300" fill="#ffffff" />
+
+  <!-- Stadium: grey stands and a green pitch with a centre line and two goal boxes -->
+  <rect x="150" y="120" width="220" height="150" fill="#9fb0c3" />
+  <rect x="160" y="135" width="200" height="120" fill="#2a9d5c" />
+  <rect x="258" y="135" width="4" height="120" fill="#ffffff" />
+  <rect x="160" y="170" width="24" height="50" fill="#ffffff" />
+  <rect x="164" y="174" width="16" height="42" fill="#2a9d5c" />
+  <rect x="336" y="170" width="24" height="50" fill="#ffffff" />
+  <rect x="340" y="174" width="16" height="42" fill="#2a9d5c" />
+
+  <!-- Location pin -->
+  <rect x="256" y="196" width="8" height="30" fill="#d93025" />
+  <circle cx="260" cy="188" r="20" fill="#d93025" />
+  <circle cx="260" cy="188" r="8" fill="#ffffff" />
+</svg>
