@@ -29,7 +29,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
 
@@ -66,18 +65,48 @@ a {
   max-width: 1200px;
 }
 
+/* Scroll-to-top button: hidden while the page is at the top; main.js switches
+   it to display: block after the user scrolls down 200px. It sits in the
+   bottom-left corner, which is the inline-end corner of the RTL layout. */
 #topBtn {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
+  z-index: 900; /* above page content, below the sticky header (1000) */
   display: none;
-  padding: 10px;
+  height: 44px;
+  padding: 0 16px;
   border: none;
-  border-radius: 45%;
+  border-radius: 22px;
   background: var(--gold);
-  color: white;
+  color: var(--navy-dark);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 44px;
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
-  transition: 0.3 ease;
+  transition:
+    background-color var(--transition),
+    transform var(--transition);
+}
+
+#topBtn:hover {
+  background: #d9ad62;
+  transform: translateY(-2px);
+}
+
+/* Slightly smaller on phones so it stays clear of the footer copyright line */
+@media (max-width: 575.98px) {
+  #topBtn {
+    bottom: 16px;
+    left: 12px;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    line-height: 40px;
+  }
 }
 
 /* ==========================================================================
@@ -1053,7 +1082,6 @@ button:focus-visible {
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -1484,6 +1512,15 @@ button:focus-visible {
     align-items: flex-start;
     flex-direction: column;
     gap: 5px;
+  }
+}
+
+/* Phones: leave room on the left for the fixed Top button (12px offset + 40px
+   width) so the copyright line wraps beside it instead of running under it.
+   Placed after the last .footer-bottom rule so it is not overridden. */
+@media (max-width: 575.98px) {
+  .footer-bottom {
+    padding-left: 46px;
   }
 }
 

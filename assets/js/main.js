@@ -221,23 +221,10 @@ function initContact() {
 
 /* ---------- 5) Share an event ---------- */
 
-// Public address of the site after publishing on GitHub Pages.
-// Stays empty until publishing, then looks like: "https://username.github.io/my-website/"
-var siteBase = '';
-
-// Called by the share button with the event number; shows the link in a prompt window for copying
-function shareEvent(number) {
-  var link = 'event.html#event-' + number;
-  if (siteBase == '') {
-    alert(
-      'المشاركة غير متاحة بعد: لم يُنشر الموقع على عنوان عام حتى الآن.\n' +
-        'بعد النشر سيكون رابط هذه الفعالية بالشكل: (عنوان الموقع)/' +
-        link,
-    );
-  } else {
-    prompt('انسخ رابط الفعالية:', siteBase + link);
-  }
-}
+// The share button is created together with the event details at the end of
+// this file and calls shareEvent(id), which is defined there. An older
+// shareEvent(number) that built "event.html#event-N" links was removed: the
+// later function with the same name always replaced it, so it never ran.
 
 /* ---------- 6) "Today" badge ---------- */
 
@@ -273,34 +260,33 @@ function markTodayEvents() {
   }
 }
 
-/**
- * For Scroll To Top
- * Shows a button when user scrolls down 200px and scrolls smoothly to top when clicked
- * Uses window.onscroll to toggle button visibility and window.scrollTo for smooth scrolling
- */
-const btn = document.getElementById('topBtn');
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-}
-window.scrollToTop = scrollToTop;
-window.onscroll = function () {
-  if (document.documentElement.scrollTop > 200) {
-    btn.style.display = 'block';
-  } else {
-    btn.style.display = 'none';
-  }
-};
+/* ---------- 7) Scroll-to-top button ---------- */
 
-/**
- * Render event details based on the ID parameter in the URL
- * Finds the event data from the events array and generates HTML to display event details, including title, date, location, description, gallery, and related events
- * Handles the case when no ID is provided or event is not found, showing a message accordingly
- * Uses the same language selection logic to display content in Arabic or English based on user preference stored in localStorage
- */
-const events = [
+// The button (id topBtn) is placed once near the end of every page
+var topButton = document.getElementById('topBtn');
+
+// Called by the button's onclick: jumps back to the top of the current page
+function scrollToTop() {
+  window.scrollTo(0, 0);
+}
+
+// Shows the button only after the page is scrolled down more than 200px
+function toggleTopButton() {
+  if (document.documentElement.scrollTop > 200) {
+    topButton.style.display = 'block';
+  } else {
+    topButton.style.display = 'none';
+  }
+}
+
+// Runs every time the page is scrolled
+window.onscroll = toggleTopButton;
+
+/* ---------- 8) Event details page ---------- */
+
+// Full data for the details page (event.html?id=N). The id matches the number
+// in the links on the home and events pages.
+var events = [
   {
     id: 1,
     title: 'أمسية شعرية: أصوات شابة',
@@ -406,340 +392,243 @@ const events = [
   },
 ];
 
-const params = new URLSearchParams(window.location.search);
-const id = Number(params.get('id'));
-const containerEventDetails = document.getElementById('eventDetails');
-const text = (value) => {
-  if (value && typeof value === 'object') {
-    return value.ar ?? '';
-  }
+// The empty box on event.html that receives the details (null on other pages)
+var containerEventDetails = document.getElementById('eventDetails');
 
-  return value ?? '';
-};
-function getImagePath(path) {
-  if (!path) return '';
-
-  try {
-    return new URL(path, document.baseURI).href;
-  } catch (error) {
-    console.error('مسار الصورة غير صالح:', path, error);
-    return '';
+// Reads N from the page address "event.html?id=N".
+// Returns 0 when there is no id, so no event matches.
+function getEventIdFromAddress() {
+  var query = window.location.search.substring(1); // text after "?", e.g. "id=3"
+  var parts = query.split('&');
+  for (var i = 0; i < parts.length; i++) {
+    if (parts[i].indexOf('id=') == 0) {
+      return Number(parts[i].substring(3)); // "abc" gives NaN, which matches no event
+    }
   }
+  return 0;
 }
+
+// Returns the event with this id, or null when there is none
+function findEventById(eventId) {
+  for (var i = 0; i < events.length; i++) {
+    if (events[i].id == eventId) {
+      return events[i];
+    }
+  }
+  return null;
+}
+
+// Called from the onerror attribute of each image: hides an image that failed to load
 function handleImageError(img) {
-  console.error('تعذر تحميل الصورة:', img.src);
   img.style.display = 'none';
 }
-function getCategoryIcon(category) {
-  const icons = {
-    ثقافة: 'bi-book-half',
-    رياضة: 'bi-trophy',
-    موسيقى: 'bi-music-note-beamed',
-    عائلي: 'bi-people',
-  };
 
-  return icons[category] || 'bi-calendar-event';
+// Bootstrap icon shown on the cover label for each category
+function getCategoryIcon(category) {
+  if (category == 'ثقافة') {
+    return 'bi-book-half';
+  } else if (category == 'رياضة') {
+    return 'bi-trophy';
+  } else if (category == 'موسيقى') {
+    return 'bi-music-note-beamed';
+  } else if (category == 'عائلي') {
+    return 'bi-people';
+  }
+  return 'bi-calendar-event';
 }
 
+// CSS class suffix of the category badge (cat-culture, cat-sports, ...)
+function getCategoryClass(category) {
+  if (category == 'ثقافة') {
+    return 'culture';
+  } else if (category == 'رياضة') {
+    return 'sports';
+  } else if (category == 'موسيقى') {
+    return 'music';
+  } else if (category == 'عائلي') {
+    return 'family';
+  }
+  return 'default';
+}
+
+// One line of the information box: icon, small label and value
+function renderInfoItem(icon, label, value) {
+  return (
+    ' <div class="event-info-item">' +
+    ' <span class="event-info-icon">' +
+    ' <i class="bi ' + icon + '"></i>' +
+    ' </span>' +
+    ' <div>' +
+    ' <small>' + label + '</small>' +
+    ' <p>' + value + '</p>' +
+    ' </div>' +
+    ' </div> '
+  );
+}
+
+// Builds the details of the event chosen in the address and puts them in the page.
+// Shows a "not found" card when the id is missing or unknown.
 function renderEventDetails() {
-  if (!containerEventDetails) return;
-
-  const eventData = events.find((event) => event.id === id);
-
-  if (!eventData) {
-    containerEventDetails.innerHTML = `
-      <div class="event-content-card text-center">
-        <h2>الفعالية غير موجودة</h2>
-        <p>لم يتم العثور على الفعالية المطلوبة.</p>
-        <a href="events.html" class="btn btn-main">
-          العودة إلى الفعاليات
-        </a>
-      </div>
-    `;
+  if (containerEventDetails == null) {
     return;
   }
 
-  const title = text(eventData.title);
-  const desc = text(eventData.desc);
-  const about = text(eventData.about);
-  const location = text(eventData.location);
-  const date = text(eventData.date);
-  const time = text(eventData.time);
-  const category = text(eventData.cat);
+  var eventData = findEventById(getEventIdFromAddress());
 
-  const galleryImages = [
-    eventData.gallery?.image_1,
-    eventData.gallery?.image_2,
-    eventData.gallery?.image_3,
-  ].filter(Boolean);
+  if (eventData == null) {
+    containerEventDetails.innerHTML =
+      '<div class="event-content-card text-center">' +
+      ' <h2>الفعالية غير موجودة</h2>' +
+      ' <p>لم يتم العثور على الفعالية المطلوبة.</p>' +
+      ' <a href="events.html" class="btn btn-main"> العودة إلى الفعاليات </a>' +
+      ' </div>';
+    return;
+  }
 
-  const icon = getCategoryIcon(category);
-  const relatedEvents = events
-    .filter(
-      (event) => event.id !== eventData.id && text(event.cat) === category,
-    )
-    .slice(0, 3);
-  const mapQuery = encodeURIComponent(`${location}, Syria`);
-  containerEventDetails.innerHTML = `
-    <article
-      class="event-detail event-detail-single"
-      id="event-${eventData.id}"
-    >
+  var title = eventData.title;
+  var category = eventData.cat;
+  var place = eventData.location;
+  var i;
 
-      <div class="event-heading">
-        <span class="badge cat-${getCategoryClass(category)}">
-          ${category}
-        </span>
-
-        <h2>${title}</h2>
-        <p>${desc}</p>
-      </div>
-
-      <div class="row g-4 align-items-stretch event-main-row">
-
-        <div class="col-lg-7">
-          <div class="event-cover">
-            <img
-              src="${getImagePath(eventData.image)}"
-              class="img-fluid"
-              alt="${title}"
-              width="1920"
-              height="1152"
-              onerror="handleImageError(this)"
-            />
-
-            <span class="event-cover-label">
-              <i class="bi ${icon}"></i>
-              فعالية
-            </span>
-          </div>
-        </div>
-
-        <div class="col-lg-5">
-          <div class="info-box event-info-box">
-
-            <h3>
-              <i class="bi bi-calendar2-event"></i>
-              معلومات الفعالية
-            </h3>
-
-            ${renderInfoItem('bi-calendar3', 'التاريخ', date)}
-
-            ${renderInfoItem('bi-clock', 'الوقت', time)}
-
-            ${renderInfoItem('bi-geo-alt', 'المكان', location)}
-
-            ${renderInfoItem('bi-ticket-perforated', 'رسوم الدخول', 'مجاني')}
-
-            <div class="event-actions">
-
-              <a
-                id="calBtn${eventData.id}"
-                href="assets/calendar/event-${eventData.id}.ics"
-                download="event-${eventData.id}.ics"
-                class="btn btn-accent"
-              >
-                <i class="bi bi-calendar-plus"></i>
-                أضف للتقويم
-              </a>
-
-              <button
-                type="button"
-                id="shareBtn${eventData.id}"
-                class="btn btn-main"
-                onclick="shareEvent(${eventData.id})"
-              >
-                <i class="bi bi-share"></i>
-                مشاركة الفعالية
-              </button>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="row g-4 event-extra-content">
-
-        <div class="col-lg-8">
-          <section class="event-content-card">
-
-            <h3>
-              <i class="bi bi-info-circle"></i>
-              عن الفعالية
-            </h3>
-
-            <p>${about}</p>
-
-            <h3 class="mt-4">
-              <i class="bi bi-images"></i>
-              صور من الفعالية
-            </h3>
-
-            <div class="row g-3 gallery event-gallery">
-
-              ${galleryImages
-                .map(
-                  (image, index) => `
-                    <div class="col-4">
-                      <img
-                        class="img-fluid"
-                        src="${getImagePath(image)}"
-                        alt="${title} - الصورة ${index + 1}"
-                        loading="lazy"
-                        onerror="handleImageError(this)"
-                      />
-                    </div>
-                  `,
-                )
-                .join('')}
-
-            </div>
-          </section>
-        </div>
-
-        <div class="col-lg-4">
-          <aside class="event-location-card">
-
-            <h3>
-              <i class="bi bi-geo"></i>
-              موقع الفعالية
-            </h3>
-
-            <iframe
-              src="https://maps.google.com/maps?q=${mapQuery}&output=embed"
-              width="100%"
-              height="250"
-              style="border:0"
-              loading="lazy"
-              title="خريطة موقع الفعالية"
-              allowfullscreen
-            ></iframe>
-
-            <p>${location}</p>
-
-          </aside>
-        </div>
-
-      </div>
-
-      ${
-        relatedEvents.length
-          ? `
-            <section class="event-content-card mt-4">
-
-              <h3>
-                <i class="bi bi-calendar2-week"></i>
-                فعاليات ذات صلة
-              </h3>
-
-              <div class="row g-3">
-
-                ${relatedEvents
-                  .map(
-                    (event) => `
-                      <div class="col-md-4">
-
-                        <div class="event-content-card h-100">
-
-                          <img
-                            src="${getImagePath(event.image)}"
-                            class="img-fluid"
-                            alt="${text(event.title)}"
-                            loading="lazy"
-                            onerror="handleImageError(this)"
-                          />
-
-                          <h4 class="mt-3">${text(event.title)}</h4>
-
-                          <p>${text(event.desc)}</p>
-
-                          <a
-                            class="btn btn-main mt-2"
-                            href="event.html?id=${event.id}"
-                          >
-                            عرض التفاصيل
-                          </a>
-
-                        </div>
-                      </div>
-                    `,
-                  )
-                  .join('')}
-
-              </div>
-            </section>
-          `
-          : ''
-      }
-
-    </article>
-  `;
-
-  containerEventDetails.querySelectorAll('img').forEach((img) => {
-    if (img.complete && img.naturalWidth === 0) {
-      handleImageError(img);
-    }
-  });
-}
-
-function renderInfoItem(icon, label, value) {
-  return `
-    <div class="event-info-item">
-
-      <span class="event-info-icon">
-        <i class="bi ${icon}"></i>
-      </span>
-
-      <div>
-        <small>${label}</small>
-        <p>${value}</p>
-      </div>
-
-    </div>
-  `;
-}
-
-function getCategoryClass(category) {
-  const classes = {
-    ثقافة: 'culture',
-    رياضة: 'sports',
-    موسيقى: 'music',
-    عائلي: 'family',
-  };
-
-  return classes[category] || 'default';
-}
-
-async function shareEvent(eventId) {
-  const eventData = events.find((event) => event.id === eventId);
-  if (!eventData) return;
-
-  const shareUrl = new URL(window.location.href);
-  shareUrl.searchParams.set('id', eventId);
-
-  const shareData = {
-    title: text(eventData.title),
-    text: text(eventData.desc),
-    url: shareUrl.href,
-  };
-
-  try {
-    if (navigator.share) {
-      await navigator.share(shareData);
-    } else if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(shareData.url);
-      alert('تم نسخ رابط الفعالية');
-    } else {
-      window.prompt('انسخ رابط الفعالية:', shareData.url);
-    }
-  } catch (error) {
-    if (error.name !== 'AbortError') {
-      console.error('تعذرت مشاركة الفعالية:', error);
+  // Small gallery: one column for each image that exists
+  var galleryImages = [
+    eventData.gallery.image_1,
+    eventData.gallery.image_2,
+    eventData.gallery.image_3
+  ];
+  var galleryHtml = '';
+  var imageNumber = 0;
+  for (i = 0; i < galleryImages.length; i++) {
+    if (galleryImages[i]) {
+      imageNumber++;
+      galleryHtml +=
+        ' <div class="col-4">' +
+        ' <img class="img-fluid" src="' + galleryImages[i] + '"' +
+        ' alt="' + title + ' - الصورة ' + imageNumber + '"' +
+        ' loading="lazy" onerror="handleImageError(this)" />' +
+        ' </div> ';
     }
   }
+
+  // Related events: up to three other events of the same category
+  var relatedHtml = '';
+  var relatedCount = 0;
+  for (i = 0; i < events.length && relatedCount < 3; i++) {
+    var other = events[i];
+    if (other.id != eventData.id && other.cat == category) {
+      relatedCount++;
+      relatedHtml +=
+        ' <div class="col-md-4">' +
+        ' <div class="event-content-card h-100">' +
+        ' <img src="' + other.image + '" class="img-fluid" alt="' + other.title + '"' +
+        ' loading="lazy" onerror="handleImageError(this)" />' +
+        ' <h4 class="mt-3">' + other.title + '</h4>' +
+        ' <p>' + other.desc + '</p>' +
+        ' <a class="btn btn-main mt-2" href="event.html?id=' + other.id + '"> عرض التفاصيل </a>' +
+        ' </div>' +
+        ' </div> ';
+    }
+  }
+  if (relatedCount > 0) {
+    relatedHtml =
+      ' <section class="event-content-card mt-4">' +
+      ' <h3> <i class="bi bi-calendar2-week"></i> فعاليات ذات صلة </h3>' +
+      ' <div class="row g-3">' +
+      relatedHtml +
+      ' </div>' +
+      ' </section> ';
+  }
+
+  // Embedded map searched by the place name
+  var mapLink =
+    'https://maps.google.com/maps?q=' +
+    encodeURIComponent(place + ', Syria') +
+    '&output=embed';
+
+  containerEventDetails.innerHTML =
+    '<article class="event-detail event-detail-single" id="event-' + eventData.id + '">' +
+    // Heading: category badge, title and short description
+    ' <div class="event-heading">' +
+    ' <span class="badge cat-' + getCategoryClass(category) + '"> ' + category + ' </span>' +
+    ' <h2>' + title + '</h2>' +
+    ' <p>' + eventData.desc + '</p>' +
+    ' </div>' +
+    // Cover image and information box
+    ' <div class="row g-4 align-items-stretch event-main-row">' +
+    ' <div class="col-lg-7">' +
+    ' <div class="event-cover">' +
+    ' <img src="' + eventData.image + '" class="img-fluid" alt="' + title + '"' +
+    ' width="1920" height="1152" onerror="handleImageError(this)" />' +
+    ' <span class="event-cover-label">' +
+    ' <i class="bi ' + getCategoryIcon(category) + '"></i>' +
+    ' فعالية </span>' +
+    ' </div>' +
+    ' </div>' +
+    ' <div class="col-lg-5">' +
+    ' <div class="info-box event-info-box">' +
+    ' <h3> <i class="bi bi-calendar2-event"></i> معلومات الفعالية </h3>' +
+    renderInfoItem('bi-calendar3', 'التاريخ', eventData.date) +
+    renderInfoItem('bi-clock', 'الوقت', eventData.time) +
+    renderInfoItem('bi-geo-alt', 'المكان', place) +
+    renderInfoItem('bi-ticket-perforated', 'رسوم الدخول', 'مجاني') +
+    // Add to calendar (.ics file) and share buttons
+    ' <div class="event-actions">' +
+    ' <a id="calBtn' + eventData.id + '" href="assets/calendar/event-' + eventData.id + '.ics"' +
+    ' download="event-' + eventData.id + '.ics" class="btn btn-accent">' +
+    ' <i class="bi bi-calendar-plus"></i>' +
+    ' أضف للتقويم </a>' +
+    ' <button type="button" id="shareBtn' + eventData.id + '" class="btn btn-main"' +
+    ' onclick="shareEvent(' + eventData.id + ')">' +
+    ' <i class="bi bi-share"></i>' +
+    ' مشاركة الفعالية </button>' +
+    ' </div>' +
+    ' </div>' +
+    ' </div>' +
+    ' </div>' +
+    // Full description with gallery, and the location map
+    ' <div class="row g-4 event-extra-content">' +
+    ' <div class="col-lg-8">' +
+    ' <section class="event-content-card">' +
+    ' <h3> <i class="bi bi-info-circle"></i> عن الفعالية </h3>' +
+    ' <p>' + eventData.about + '</p>' +
+    ' <h3 class="mt-4"> <i class="bi bi-images"></i> صور من الفعالية </h3>' +
+    ' <div class="row g-3 gallery event-gallery">' +
+    galleryHtml +
+    ' </div>' +
+    ' </section>' +
+    ' </div>' +
+    ' <div class="col-lg-4">' +
+    ' <aside class="event-location-card">' +
+    ' <h3> <i class="bi bi-geo"></i> موقع الفعالية </h3>' +
+    ' <iframe src="' + mapLink + '" width="100%" height="250" style="border:0"' +
+    ' loading="lazy" title="خريطة موقع الفعالية" allowfullscreen></iframe>' +
+    ' <p>' + place + '</p>' +
+    ' </aside>' +
+    ' </div>' +
+    ' </div>' +
+    relatedHtml +
+    ' </article>';
 }
 
-if (containerEventDetails) {
+// Called by the share button with the event number. Builds the public link of
+// the event from the current page address and shows it in a prompt window,
+// where the user can select and copy it. On GitHub Pages this gives
+// https://username.github.io/repository-name/event.html?id=N
+function shareEvent(number) {
+  var address = window.location.href;
+  // Remove any "#..." and "?..." part to keep only the page address
+  if (address.indexOf('#') >= 0) {
+    address = address.substring(0, address.indexOf('#'));
+  }
+  if (address.indexOf('?') >= 0) {
+    address = address.substring(0, address.indexOf('?'));
+  }
+  // Keep the site folder (everything up to the last "/") and add the event page
+  var folder = address.substring(0, address.lastIndexOf('/') + 1);
+  prompt('انسخ رابط الفعالية:', folder + 'event.html?id=' + number);
+}
+
+// Runs once when main.js loads; does nothing on pages without the details box
+if (containerEventDetails != null) {
   renderEventDetails();
 }
